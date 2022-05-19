@@ -22,7 +22,8 @@ public class Util {
     private static final String password = "root64";
 
     private static SessionFactory sessionFactory;
-    private static Connection connection;
+
+//    private static Connection connection;
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
@@ -53,27 +54,28 @@ public class Util {
         }
         return sessionFactory;
     }
-    public static Connection getConnection() {
-        try {
-            Class.forName(driver);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        Properties properties = new Properties();
-        try (InputStream in = Files.newInputStream(Paths.get("database.properties"))) {
-            properties.load(in);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        String url = properties.getProperty("url");
-        String username = properties.getProperty("username");
-        String password1 = properties.getProperty("password");
-        try {
-            connection = DriverManager.getConnection(url, username, password1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return connection;
-    }
+//    public static Connection getConnection() {
+//        try {
+//            Class.forName(driver);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//        Properties properties = new Properties();
+//        try (InputStream in = Files.newInputStream(Paths.get("database.properties"))) {
+//            properties.load(in);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        String url = properties.getProperty("url");
+//        String username = properties.getProperty("username");
+//        String password1 = properties.getProperty("password");
+//        try {
+//            connection = DriverManager.getConnection(url, username, password1);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return connection;
+//    }
 }
