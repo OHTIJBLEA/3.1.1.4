@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="test@localhost">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.38">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.39">
     <root id="1">
       <DefaultCasing>lower/lower</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -1016,32 +1016,5 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="285" parent="279" name="user">
-      <Engine>MyISAM</Engine>
-      <CollationName>utf8_general_ci</CollationName>
-    </table>
-    <column id="286" parent="285" name="id">
-      <AutoIncrement>5</AutoIncrement>
-      <DataType>bigint|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="287" parent="285" name="age">
-      <DataType>tinyint|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <column id="288" parent="285" name="lastName">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>3</Position>
-    </column>
-    <column id="289" parent="285" name="name">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>4</Position>
-    </column>
-    <key id="290" parent="285" name="PRIMARY">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-    </key>
   </database-model>
 </dataSource>
