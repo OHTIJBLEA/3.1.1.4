@@ -13,26 +13,43 @@ import static jm.task.core.jdbc.util.Util.getSessionFactory;
 
 public class UserDaoHibernateImpl implements UserDao {
 
-    SessionFactory sessionFactory = getSessionFactory();
+    final SessionFactory sessionFactory = getSessionFactory();
     public UserDaoHibernateImpl() {
 
     }
 
     @Override
     public void createUsersTable() {
+//        Session session = sessionFactory.openSession();
+//        String query = "CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT, " +
+//                "name VARCHAR(45) NOT NULL , " +
+//                "lastname VARCHAR(45) NOT NULL , " +
+//                "age TINYINT NOT NULL, " +
+//                "PRIMARY KEY (id))";
+//        try {
+//            session.createSQLQuery(query).executeUpdate();
+//        } catch (Exception e) {
+//            e.getMessage();
+//        }
+//        session.close();
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.createNativeQuery("CREATE TABLE IF NOT EXISTS user (" +
                 "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
-                "name VARCHAR(50) NOT NULL, " +
-                "lastName VARCHAR(50) NOT NULL, " +
-                "age INT NOT NULL)");
+                "name VARCHAR(50), " +
+                "lastName VARCHAR(50), " +
+                "age INT)");
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
     public void dropUsersTable() {
+//        Session session = Util.getSessionFactory().openSession();
+//        Transaction transaction = session.beginTransaction();
+//            session.createSQLQuery("DROP TABLE user").executeUpdate();
+//        transaction.commit();
+//        session.close();
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createSQLQuery("drop table if exists user").addEntity(User.class);
@@ -43,11 +60,16 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
         session.save(new User(name, lastName, age));
-        session.getTransaction().commit();
+        transaction.commit();
         session.close();
+//        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
+//        session.save(new User(name, lastName, age));
+//        session.getTransaction().commit();
+//        session.close();
     }
 
     @Override
